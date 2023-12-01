@@ -106,7 +106,7 @@ const uploadFileCloud = async(req, res = response) => {
 
  
    try {
-        const { tempFilePath } = req.files.archivo;
+        const { tempFilePath } = req.files.imagen;
         const { secure_url } = await cloudinary.uploader.upload(tempFilePath, {folder: tipo});
         const nombreArchivo = secure_url;
         // Actualizar base de datos
