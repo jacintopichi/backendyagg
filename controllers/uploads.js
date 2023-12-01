@@ -112,7 +112,7 @@ const uploadFileCloud = async(req, res = response) => {
         // Actualizar base de datos
         actualizarImagen(tipo, id,secure_url);
         res.json({
-            msg: 'Archivo subido correctamente',
+            msg: 'Archivo subido correctamenteddd',
             nombreArchivo
         })
 
