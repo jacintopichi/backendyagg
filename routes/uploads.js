@@ -3,7 +3,7 @@
 
 const { Router } = require('express');
 const { validarJWT } = require('../middlewares/validar-jws');
-const { uploadFile,mostrarImagen,uploadFileCloud } = require('../controllers/uploads');
+const { mostrarImagen,uploadFileCloud } = require('../controllers/uploads');
 
 const expressFileUpload = require('express-fileupload');
 const fileUpload = require('express-fileupload');

@@ -100,7 +100,7 @@ const mostrarImagen = async(req, res = response) => {
 
 
 module.exports = {
-    uploadFile,
+
     mostrarImagen,
     uploadFileCloud
  
