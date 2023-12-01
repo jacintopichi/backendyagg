@@ -26,7 +26,7 @@ cloudinary.v2.config({
 const uploadFile = async(req, res = response) => {
     const { tipo, id } = req.params;
 
-    // Validar tipo
+    // Validar tipo de archivo
     const tiposValidos = ['productos', 'usuarios', 'categorias' ,'articulos'];
 
     if (!tiposValidos.includes(tipo)) {
