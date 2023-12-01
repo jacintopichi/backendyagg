@@ -5,7 +5,7 @@ const { googleVerify } = require('../helpers/google-verify');
 const Usuario = require('../models/usuario');
 const { generarJWT } = require('../helpers/jwt');
 
-
+ 
 
 
 const login = async( req, res = response ) => {
@@ -95,7 +95,7 @@ const googleSignIn = async( req, res = response ) => {
 
     res.json({  
         ok: true,
-        name,
+        name, 
         email,
         picture,
         token

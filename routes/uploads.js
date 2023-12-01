@@ -10,7 +10,7 @@ const fileUpload = require('express-fileupload');
 
 const router = Router();
 
-router.use(expressFileUpload(
+router.use(expressFileUpload( 
     { useTempFiles: true }
 ));
 

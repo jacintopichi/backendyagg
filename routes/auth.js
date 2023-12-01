@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 const { validarcampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jws');
 
-const router = Router();
+const router = Router(); 
 
 
 router.post( '/',

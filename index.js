@@ -16,7 +16,7 @@ app.use(express.json());
 // Directorio publico
 app.use(express.static('public'));
 // Database
-dbConnection();
+dbConnection(); 
 
 // Routes
 app.use('/api/usuarios', require('./routes/usuarios')); // Ruta para usuarios
@@ -24,7 +24,7 @@ app.use('/api/login', require('./routes/auth')); // Ruta para login
 app.use('/api/categorias', require('./routes/categorias')); // Ruta para categorias
 app.use('/api/productos', require('./routes/productos')); // Ruta para productos
 app.use('/api/buscar', require('./routes/busquedas')); // Ruta para busquedas
-app.use('/api/uploads', require('./routes/uploads')); // Ruta para busquedas
+app.use('/api/upload', require('./routes/uploads')); // Ruta para busquedas
 app.use('/api/articles', require('./routes/article')); // Ruta para busquedas
 app.use('/api/comments', require('./routes/comments')); // Ruta para busquedas
 app.use('/api/likes', require('./routes/like')); // Ruta para busquedas
