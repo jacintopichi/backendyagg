@@ -94,17 +94,29 @@ const uploadFileCloud = async(req, res = response) => {
             msg: 'No hay ningun archivo cargado'
         })
     }
+
+    // const {tempFilePath} = req.files.imagen
+    // const {secure_url} = await cloudinary.uploader.upload(tempFilePath,{folder:tipo});
+    // const nombreArchivo = secure_url;
+    // actualizarImagen(tipo, id,nombreArchivo);
+    // res.json({
+    //     msg: 'Archivo subido correctamente',
+    //     nombreArchivo
+    // })
+
  
    try {
-    const {tempFilePath} = req.files.imagen
-    const {secure_url} = await cloudinary.uploader.upload(tempFilePath,{folder:tipo});
-    const nombreArchivo = secure_url;
-    actualizarImagen(tipo, id,nombreArchivo);
-    res.json({
-        msg: 'Archivo subido correctamente',
-        nombreArchivo
-    })
+        const { tempFilePath } = req.files.archivo;
+        const { secure_url } = await cloudinary.uploader.upload(tempFilePath, {folder: tipo});
+        const nombreArchivo = secure_url;
+        // Actualizar base de datos
+        actualizarImagen(tipo, id,secure_url);
+        res.json({
+            msg: 'Archivo subido correctamente',
+            nombreArchivo
+        })
 
+    
    }    catch (error) {      
         console.log(error);
         res.status(500).json({

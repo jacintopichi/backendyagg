@@ -4,7 +4,7 @@ const Usuario = require('../models/usuario');
 const Producto = require('../models/producto');
 const Categoria = require('../models/categoria');
 const Article = require('../models/article');
-const cloudinary = require('cloudinary').v2;
+// const cloudinary = require('cloudinary').v2;
 
 const cloudinary = require('cloudinary');
 
