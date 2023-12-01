@@ -6,8 +6,14 @@ const Categoria = require('../models/categoria');
 const Article = require('../models/article');
 const cloudinary = require('cloudinary').v2;
 
-cloudinary.config(process.env.CLOUDINARY_URL);
+const cloudinary = require('cloudinary');
 
+cloudinary.v2.config({
+  cloud_name: 'dsl9jlm1g',
+  api_key: '295136155185325',
+  api_secret: 'gCKmK3Xp-onwh44t9tNbQcMOy0c',
+  secure: true,
+});
 
 
 const actualizarImagen = async (tipo, id, nombreArchivo) => {

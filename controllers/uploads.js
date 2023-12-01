@@ -10,12 +10,18 @@ const Producto = require('../models/producto');
 const Categoria = require('../models/categoria');
 const { actualizarImagen } = require('../helpers/actualizar-imagen');
 
-const cloudinary = require('cloudinary').v2;
+// const cloudinary = require('cloudinary').v2
 
-cloudinary.config(process.env.CLOUDINARY_URL);
+// cloudinary.config(process.env.CLOUDINARY_URL);
 
+const cloudinary = require('cloudinary');
 
-
+cloudinary.v2.config({
+  cloud_name: 'dsl9jlm1g',
+  api_key: '295136155185325',
+  api_secret: 'gCKmK3Xp-onwh44t9tNbQcMOy0c',
+  secure: true,
+});
 
 const uploadFile = async(req, res = response) => {
     const { tipo, id } = req.params;
