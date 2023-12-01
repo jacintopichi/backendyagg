@@ -52,18 +52,13 @@ const login = async( req, res = response ) => {
 
 
 const googleSignIn = async( req, res = response ) => {
-
     try {
-
     const very = await googleVerify( req.body.token );
     const { name, email, picture } = very;
 
     // Verificar si el usuario existe en la BD
-
     const usuarioDB = await Usuario.findOne({ email });
-
     let usuario;
-
     if ( !usuarioDB ) {
 
         // Si no existe el usuario
@@ -80,17 +75,14 @@ const googleSignIn = async( req, res = response ) => {
     else {
         // Existe usuario
         usuario = usuarioDB;
-        usuario.google = true;
-        usuario.password = '@@@';
+        usuario.google = true;        
+       
     }
-
 
     // Guardar en BD
 
     await usuario.save();
-
     // Generar el TOKEN - JWT y yaaa
-
     const token = await generarJWT( usuario.id );
 
     res.json({  
@@ -104,15 +96,12 @@ const googleSignIn = async( req, res = response ) => {
     } catch (error) {
         console.log("errr",error);
 
-
     res.json({  
         ok: true,
         msg: 'Token no es correcto'
     })
 
 }
-
-
  
 }
 

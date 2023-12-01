@@ -8,12 +8,21 @@ const Article = require('../models/article');
 
 const cloudinary = require('cloudinary');
 
+// cloudinary.v2.config({
+//   cloud_name: 'dsl9jlm1g',
+//   api_key: '295136155185325',
+//   api_secret: 'gCKmK3Xp-onwh44t9tNbQcMOy0c',
+//   secure: true,
+// });
+
+
 cloudinary.v2.config({
-  cloud_name: 'dsl9jlm1g',
-  api_key: '295136155185325',
-  api_secret: 'gCKmK3Xp-onwh44t9tNbQcMOy0c',
-  secure: true,
-});
+    cloud_name: 'dt48zm2v5',
+    api_key: '246122593166633',
+    api_secret: 'xN_LMmYnB_crY5DTtRugveYQXlQ',
+    secure: true,
+  });
+
 
 
 const actualizarImagen = async (tipo, id, nombreArchivo) => {
@@ -25,7 +34,9 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
             if (!usuario) {
                 console.log('No es un usuario por id');
                 return false;
-            }                          
+            }         
+            
+            console.log(usuario.img);
 
            if (usuario.img) {
             const nombreArr = usuario.img.split('/');

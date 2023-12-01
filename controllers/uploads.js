@@ -16,20 +16,27 @@ const { actualizarImagen } = require('../helpers/actualizar-imagen');
 
 const cloudinary = require('cloudinary');
 
+// cloudinary.v2.config({
+//   cloud_name: 'dsl9jlm1g',
+//   api_key: '295136155185325',
+//   api_secret: 'gCKmK3Xp-onwh44t9tNbQcMOy0c',
+//   secure: true,
+// });
+
 cloudinary.v2.config({
-  cloud_name: 'dsl9jlm1g',
-  api_key: '295136155185325',
-  api_secret: 'gCKmK3Xp-onwh44t9tNbQcMOy0c',
-  secure: true,
-});
+    cloud_name: 'dt48zm2v5',
+    api_key: '246122593166633',
+    api_secret: 'xN_LMmYnB_crY5DTtRugveYQXlQ',
+    secure: true,
+  });
+
 
 
 
 const uploadFileCloud = async(req, res = response) => {
-    const { tipo, id } = req.params;
-
+    const { tipo, id } = req.params; 
     // Validar tipo
-    const tiposValidos = ['productos', 'usuarios', 'categorias','articulos'];
+    const tiposValidos = ['productos', 'usuarios', 'categorias','articulos'];   
 
     if (!tiposValidos.includes(tipo)) {
         return res.status(400).json({
@@ -43,27 +50,24 @@ const uploadFileCloud = async(req, res = response) => {
             msg: 'No hay ningun archivo cargado'
         })
     }
-
-    // const {tempFilePath} = req.files.imagen
-    // const {secure_url} = await cloudinary.uploader.upload(tempFilePath,{folder:tipo});
-    // const nombreArchivo = secure_url;
-    // actualizarImagen(tipo, id,nombreArchivo);
-    // res.json({
-    //     msg: 'Archivo subido correctamente',
-    //     nombreArchivo
-    // })
-
  
    try {
-        const { tempFilePath } = req.files.imagen;
-        const { secure_url } = await cloudinary.uploader.upload(tempFilePath, {folder: tipo});
-        const nombreArchivo = secure_url;
-        // Actualizar base de datos
-        actualizarImagen(tipo, id,nombreArchivo);
-        res.json({
-            msg: 'Archivo subido correctamente ',
-            nombreArchivo
-        })
+    const uploadOptions = {
+        folder: tipo === 'usuarios' ? 'usuarios' : tipo === 'productos' ? 'productos' : tipo === 'categorias' ? 'categorias' : 'articulos',
+        use_filename: true,
+         unique_filename: true,
+         public_id: uuidv4(),
+         transformation: [{ width: 500, height: 500, crop: "limit" }]
+    };
+        
+   const {tempFilePath} = req.files.imagen
+    const {secure_url} = await cloudinary.uploader.upload(tempFilePath, uploadOptions);
+    const nombreArchivo = secure_url;
+    actualizarImagen(tipo, id,nombreArchivo);
+    res.json({
+        msg: 'Archivo subido correctamente',
+        nombreArchivo
+    })
 
     
    }    catch (error) {      
