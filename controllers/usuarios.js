@@ -3,7 +3,7 @@ const Usuario = require('../models/usuario');
 const { response } = require('express');
 
 const bcrypt = require('bcryptjs');
-const { generarJWT } = require('../helpers/jwt');
+const { generarJWT,validarJWT  } = require('../helpers/jwt');
 const { sendEmailLink,sendEmailLinkResetpassword  } = require('../helpers/send-email');
 
 

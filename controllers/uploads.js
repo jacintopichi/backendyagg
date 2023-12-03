@@ -35,6 +35,7 @@ cloudinary.v2.config({
 
 const uploadFileCloud = async(req, res = response) => {
     const { tipo, id } = req.params; 
+
     // Validar tipo
     const tiposValidos = ['productos', 'usuarios', 'categorias','articulos'];   
 
@@ -52,16 +53,13 @@ const uploadFileCloud = async(req, res = response) => {
     }
  
    try {
-    const uploadOptions = {
-        folder: tipo === 'usuarios' ? 'usuarios' : tipo === 'productos' ? 'productos' : tipo === 'categorias' ? 'categorias' : 'articulos',
-        use_filename: true,
-         unique_filename: true,
-         public_id: uuidv4(),
-         transformation: [{ width: 500, height: 500, crop: "limit" }]
-    };
+
         
    const {tempFilePath} = req.files.imagen
-    const {secure_url} = await cloudinary.uploader.upload(tempFilePath, uploadOptions);
+    const {secure_url} = await cloudinary.uploader.upload(tempFilePath 
+         , {folder: 'prueba'}
+        );
+
     const nombreArchivo = secure_url;
     actualizarImagen(tipo, id,nombreArchivo);
     res.json({

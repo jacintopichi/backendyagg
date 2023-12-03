@@ -66,6 +66,7 @@ const googleSignIn = async( req, res = response ) => {
             nombre: name,
             email,
             tipo: 'google',
+            emailVerified: true,
             password: '@@@',
             img: picture,
             google: true,

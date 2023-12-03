@@ -36,14 +36,14 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
                 return false;
             }         
             
-            console.log(usuario.img);
+       
 
            if (usuario.img) {
             const nombreArr = usuario.img.split('/');
             const nombre = nombreArr[nombreArr.length - 1];
             const [ public_id ] = nombre.split('.');
          
-            await  cloudinary.uploader.destroy('usuarios/' + public_id);
+            await  cloudinary.uploader.destroy( public_id);
          }
 
         // actualizarImagen(nombreArchivo, path);
@@ -65,7 +65,7 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
          const nombreArr = productos.img.split('/');
          const nombre = nombreArr[nombreArr.length - 1];
          const [ public_id ] = nombre.split('.');   
-         await  cloudinary.uploader.destroy('productos/' + public_id);
+         await  cloudinary.uploader.destroy( public_id);
       
       }
 
@@ -87,7 +87,7 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
         const nombreArr = categorias.img.split('/');
         const nombre = nombreArr[nombreArr.length - 1];      
         const [public_id] = nombre.split('.');        
-        await  cloudinary.uploader.destroy('categorias/' + public_id);     
+        await  cloudinary.uploader.destroy(public_id);     
      }
 
         categorias.img = nombreArchivo;
@@ -109,7 +109,7 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
             const nombreArr = articulos.img.split('/');
             const nombre = nombreArr[nombreArr.length - 1];
             const [ public_id ] = nombre.split('.');
-            await  cloudinary.uploader.destroy('articulos/' + public_id);
+            await  cloudinary.uploader.destroy( public_id);
          }
 
         articulos.img = nombreArchivo;
@@ -126,88 +126,8 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
 
 }
 
-const actualizarImagenCloudinary = async (tipo, id, path , nombreArchivo) => {
-
-    switch (tipo) {
-        case 'usuarios':
-            const usuario = await Usuario.findById(id);
-            if (!usuario) {
-                console.log('No es un usuario por id');
-                return false;
-            }
-            const pathViejo = `./uploads/usuarios/${usuario.img}`;
-            actualizarImagen(pathViejo, path);
-           if (fs.existsSync(pathViejo)) {
-                fs.unlinkSync(pathViejo);
-            }
-            usuario.img = nombreArchivo;
-            await usuario.save();  
-           return true;
-        break;
-
-        case 'productos':
-        const productos = await Producto.findById(id);
-        if (!productos) {
-            console.log('No es un productos por id');
-            return false;
-        }
-        const pathViejoproductos = `./uploads/productos/${productos.img}`;
-        actualizarImagen(pathViejoproductos, path);
-       if (fs.existsSync(pathViejoproductos)) {
-            fs.unlinkSync(pathViejoproductos);
-        }
-        productos.img = nombreArchivo;
-        await productos.save();  
-       return true;
-        break;
-
-        case 'categorias':
-        const categorias = await Categoria.findById(id);
-        if (!categorias) {
-            console.log('No es un productos por id');
-            return false;
-        }
-        const pathViejocategorias = `./uploads/categorias/${categorias.img}`;
-        actualizarImagen(pathViejocategorias, path);
-
-       if (fs.existsSync(pathViejocategorias)) {
-            fs.unlinkSync(pathViejocategorias);
-        }
-        categorias.img = nombreArchivo;
-
-        await categorias.save();
-        return true;      
-
-        break;
-
-        case 'articulos':
-        const articulos = await Article.findById(id);
-        if (!articulos) {
-            console.log('No es un articulos por id');
-            return false;
-        }
-
-        const pathViejoarticulos = `./uploads/articulos/${articulos.img}`;
-        actualizarImagen(pathViejoarticulos, path);
-        if (fs.existsSync(pathViejoarticulos)) {
-              fs.unlinkSync(pathViejoarticulos);
-          }
-        articulos.img = nombreArchivo;
-        await articulos.save();
-        return true;
-        break;
-
-        default:
-
-        break;
-    
-}
-
-}
-
-
 
 module.exports = {
     actualizarImagen,
-    actualizarImagenCloudinary
+   
 }
