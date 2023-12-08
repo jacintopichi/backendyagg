@@ -21,11 +21,9 @@ dbConnection();
 // Routes
 app.use('/api/usuarios', require('./routes/usuarios')); // Ruta para usuarios
 app.use('/api/login', require('./routes/auth')); // Ruta para 
-
 app.use('/api/resetpassword', require('./routes/usuarios')); // Ruta para reset password
 app.use('/api/resetpasswordconfirm', require('./routes/usuarios')); // Ruta para reset password confirm
 app.use('/api/validate-email', require('./routes/usuarios')); // Ruta para 
-
 app.use('/api/categorias', require('./routes/categorias')); // Ruta para categorias
 app.use('/api/productos', require('./routes/productos')); // Ruta para productos
 app.use('/api/buscar', require('./routes/busquedas')); // Ruta para busquedas
@@ -34,6 +32,7 @@ app.use('/api/articles', require('./routes/article')); // Ruta para busquedas
 app.use('/api/comments', require('./routes/comments')); // Ruta para busquedas
 app.use('/api/likes', require('./routes/like')); // Ruta para busquedas
 app.use('/api/dislikes', require('./routes/dislikes')); // Ruta para busquedas
+app.use('/api/testimonials', require('./routes/testimonial')); // Ruta para busquedas
 
 
 

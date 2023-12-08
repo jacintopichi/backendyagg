@@ -121,6 +121,52 @@ const actualizarProducto = async(req, res = response) => {
 
     }
 
+    const actualizarLinkProducto = async(req, res = response) => {
+            
+            const uid = req.params.id;
+            try {
+                const productoDB = await Producto.findById(uid);
+                if (!productoDB) {
+                    return res.status(404).json({
+                        ok: false,
+                        msg: 'No existe una producto con ese id'
+                    });
+                }
+        
+                // Actualizaciones
+        
+                const { linkdepago, ...campos } = req.body;
+
+                if(linkdepago == ''){
+                    campos.linkdepago = linkdepago;        
+                    const productoActualizado = await Producto.findByIdAndUpdate(uid, campos, { new: true }); 
+                    return res.json({
+                        ok: true,
+                        producto: productoActualizado
+                    });
+                  
+                }               
+        
+                campos.linkdepago = linkdepago;
+        
+                const productoActualizado = await Producto.findByIdAndUpdate(uid, campos, { new: true });
+        
+                res.json({
+                    ok: true,
+                    producto: productoActualizado
+                });
+            }
+        
+            catch (error) {
+                console.log(error);
+                res.status(500).json({
+                    ok: false,
+                    msg: 'Hable con el administrador'
+                });
+            }
+        
+            }
+
 const borrarProducto = async(req, res = response) => {
 
     const uid = req.params.id;
@@ -162,6 +208,7 @@ module.exports = {
     crearProducto,
     actualizarProducto,
     borrarProducto,
-    getProductosById
+    getProductosById,
+    actualizarLinkProducto
 }
 // Compare this snippet from routes\productos.js:

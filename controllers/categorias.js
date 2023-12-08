@@ -8,9 +8,11 @@ const getCategorias = async(req, res) => {
     
     await Promise.all([
         Categoria.countDocuments(),
-        Categoria.find().populate('usuario', 'nombre img')
+        Categoria.find({},'nombre img estado')
+        .populate('usuario', 'nombre email img')    
             .skip( desde )
             .limit( 10 )
+        
     ])
     .then( respuestas => {
 

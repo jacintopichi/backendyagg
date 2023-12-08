@@ -5,13 +5,10 @@ const CategoriaSchema = Schema({
         type: String,
         required: [true, 'El nombre es obligatorio']
     },
-
     estado: {
         type: Boolean,
-        default: true,
-        required: true
+        default: true,        
     },
-
     usuario: {
         type: Schema.Types.ObjectId,
         ref: 'Usuario',
@@ -27,7 +24,7 @@ const CategoriaSchema = Schema({
 // Sobreescribir el método toJSON
 
 CategoriaSchema.methods.toJSON = function() {
-    const { __v, estado, ...categoria } = this.toObject();
+    const { __v, ...categoria } = this.toObject();
     return categoria;
 }
 

@@ -25,7 +25,7 @@ cloudinary.v2.config({
 
 
 
-const actualizarImagen = async (tipo, id, nombreArchivo) => {
+const actualizarImagen1 = async (tipo, id, nombreArchivo) => {
 
     switch (tipo) {
 
@@ -61,15 +61,15 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
             return false;
         }
 
-         if (productos.img) {
-         const nombreArr = productos.img.split('/');
+         if (productos.img1) {
+         const nombreArr = productos.img1.split('/');
          const nombre = nombreArr[nombreArr.length - 1];
          const [ public_id ] = nombre.split('.');   
          await  cloudinary.uploader.destroy( public_id);
       
       }
 
-        productos.img = nombreArchivo;
+        productos.img1 = nombreArchivo;
 
         await productos.save();  
       return true;
@@ -127,7 +127,111 @@ const actualizarImagen = async (tipo, id, nombreArchivo) => {
 }
 
 
+
+const actualizarImagen = async (tipo, id, nombreArchivo) => {
+
+  switch (tipo) {
+
+      case 'usuarios':
+          const usuario = await Usuario.findById(id);
+          if (!usuario) {
+              console.log('No es un usuario por id');
+              return false;
+          }         
+          
+     
+
+         if (usuario.img) {
+          const nombreArr = usuario.img.split('/');
+          const nombre = nombreArr[nombreArr.length - 1];
+          const [ public_id ] = nombre.split('.');
+       
+          await  cloudinary.uploader.destroy( public_id);
+       }
+
+      // actualizarImagen(nombreArchivo, path);
+          usuario.img = nombreArchivo;
+
+          await usuario.save();  
+        return true;
+
+      break;
+
+      case 'productos':
+      const productos = await Producto.findById(id);
+      if (!productos) {
+          console.log('No es un productos por id');
+          return false;
+      }
+
+       if (productos.img) {
+       const nombreArr = productos.img.split('/');
+       const nombre = nombreArr[nombreArr.length - 1];
+       const [ public_id ] = nombre.split('.');   
+       await  cloudinary.uploader.destroy( public_id);
+    
+    }
+
+      productos.img = nombreArchivo;
+
+      await productos.save();  
+    return true;
+
+      break;
+
+      case 'categorias':
+      const categorias = await Categoria.findById(id);
+      if (!categorias) {
+          console.log('No es una categoria por id');
+          return false;
+      }
+    
+   if (categorias.img) {
+      const nombreArr = categorias.img.split('/');
+      const nombre = nombreArr[nombreArr.length - 1];      
+      const [public_id] = nombre.split('.');        
+      await  cloudinary.uploader.destroy(public_id);     
+   }
+
+      categorias.img = nombreArchivo;
+      await categorias.save();
+    return true;        
+
+      break;
+
+      case 'articulos':
+
+      const articulos = await Article.findById(id);
+      if (!articulos) {
+          console.log('No es un articulos por id');
+          return false;
+      }
+
+     
+      if (articulos.img) {
+          const nombreArr = articulos.img.split('/');
+          const nombre = nombreArr[nombreArr.length - 1];
+          const [ public_id ] = nombre.split('.');
+          await  cloudinary.uploader.destroy( public_id);
+       }
+
+      articulos.img = nombreArchivo;
+      await articulos.save();
+    return true;
+
+      break;
+
+
+      default:
+
+      break;    
+}
+
+}
+
+
 module.exports = {
     actualizarImagen,
+    actualizarImagen1
    
 }

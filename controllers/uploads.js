@@ -8,7 +8,7 @@ const path = require('path');
 const Usuario = require('../models/usuario');
 const Producto = require('../models/producto');
 const Categoria = require('../models/categoria');
-const { actualizarImagen } = require('../helpers/actualizar-imagen');
+const { actualizarImagen , actualizarImagen1} = require('../helpers/actualizar-imagen');
 
 // const cloudinary = require('cloudinary').v2
 
@@ -78,6 +78,51 @@ const uploadFileCloud = async(req, res = response) => {
 }
 
 
+
+const uploadFileCloudImagen1 = async(req, res = response) => {
+    const { tipo, id } = req.params; 
+
+    // Validar tipo
+    const tiposValidos = ['productos', 'usuarios', 'categorias','articulos'];   
+
+    if (!tiposValidos.includes(tipo)) {
+        return res.status(400).json({
+            msg: 'No es un tipo valido'
+        })
+    }
+
+    // Validar que exista un archivo
+    if (!req.files || Object.keys(req.files).length === 0) {
+        return res.status(400).json({
+            msg: 'No hay ningun archivo cargado'
+        })
+    }
+ 
+   try {
+
+        
+   const {tempFilePath} = req.files.imagen1
+    const {secure_url} = await cloudinary.uploader.upload(tempFilePath , {folder: 'prueba'}  );
+
+    const nombreArchivo = secure_url;
+    actualizarImagen1(tipo, id,nombreArchivo);
+    res.json({
+        msg: 'Archivo subido correctamente',
+        nombreArchivo
+    })
+
+    
+   }    catch (error) {      
+        console.log(error);
+        res.status(500).json({
+            msg: 'Error al subir la imagen',
+            error
+        })
+    }
+}
+
+
+
 const mostrarImagen = async(req, res = response) => {
 
     const { tipo, foto } = req.params;
@@ -104,6 +149,7 @@ const mostrarImagen = async(req, res = response) => {
 module.exports = {
 
     mostrarImagen,
-    uploadFileCloud
+    uploadFileCloud,
+    uploadFileCloudImagen1
  
 }
