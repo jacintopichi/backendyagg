@@ -56,7 +56,7 @@ const uploadFileCloud = async(req, res = response) => {
 
         
    const {tempFilePath} = req.files.imagen
-   cloudinary.image(tempFilePath, {width: 100, height: 100, crop: "fill"})
+   cloudinary.image(tempFilePath, {width: 70, height: 100, crop: "fill"})
     const {secure_url} = await cloudinary.uploader.upload(tempFilePath , {folder: 'prueba'}   );
 
     const nombreArchivo = secure_url;
@@ -102,7 +102,7 @@ const uploadFileCloudImagen1 = async(req, res = response) => {
         
    const {tempFilePath} = req.files.imagen1
 
-   cloudinary.image(tempFilePath, {width: 100, height: 100, crop: "fill"})
+   cloudinary.image(tempFilePath, {width: 70, height: 100, crop: "fill"})
     const {secure_url} = await cloudinary.uploader.upload(tempFilePath , {folder: 'prueba'}  );
 
     const nombreArchivo = secure_url;
