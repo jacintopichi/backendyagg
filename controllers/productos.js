@@ -167,6 +167,41 @@ const actualizarProducto = async(req, res = response) => {
         
             }
 
+const actualizarEstadoProducto = async(req, res = response) => {    
+        const uid = req.params.id;
+        try {
+            const productoDB = await Producto.findById(uid);
+            if (!productoDB) {
+                return res.status(404).json({
+                    ok: false,
+                    msg: 'No existe una producto con ese id'
+                });
+            }
+    
+            // Actualizaciones
+    
+            const { estado, ...campos } = req.body;
+    
+            campos.estado = estado;
+    
+            const productoActualizado = await Producto.findByIdAndUpdate(uid, campos, { new: true });
+    
+            res.json({
+                ok: true,
+                producto: productoActualizado
+            });
+        }
+    
+        catch (error) {
+            console.log(error);
+            res.status(500).json({
+                ok: false,
+                msg: 'Hable con el administrador'
+            });
+        }
+    
+        }
+
 const borrarProducto = async(req, res = response) => {
 
     const uid = req.params.id;
@@ -201,6 +236,34 @@ const borrarProducto = async(req, res = response) => {
 
 }
 
+const getProductosByCategoria = async(req, res = response) => {
+    const categoria = req.params.categoria;
+    const desde = Number(req.query.desde) || 0;
+    try {
+        const [productos, total] = await Promise.all([
+            Producto.find({ categoria }).populate('usuario', 'nombre img telefono')
+            .populate('categoria', 'nombre img')
+            .skip( desde )
+            .limit( 12 ),
+            Producto.countDocuments({ categoria })                
+        ]);
+        res.json({
+            ok: true,
+            productos,            
+            total
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado'
+        });
+
+    }
+
+}
+
 
 
 module.exports = {
@@ -209,6 +272,8 @@ module.exports = {
     actualizarProducto,
     borrarProducto,
     getProductosById,
-    actualizarLinkProducto
+    actualizarLinkProducto,
+    getProductosByCategoria,
+    actualizarEstadoProducto
 }
 // Compare this snippet from routes\productos.js:

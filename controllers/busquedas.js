@@ -13,7 +13,7 @@ const getTodo = async(req, res = response) => {
     if (isNaN(busqueda)) {
         const [ usuarios, productos, categorias ] = await Promise.all([
             Usuario.find({ nombre: regex }),
-            Producto.find({ $or: [ { nombre: regex }, { descripcion: regex } ] })
+            Producto.find({ $or: [ { nombre: regex }, { descripcion: regex }, { tags: regex }] })
             .populate('usuario', 'nombre img')
             .populate('categoria', 'nombre img'),
             Categoria.find({ $or: [ { nombre: regex } ] })   
@@ -54,7 +54,7 @@ const getDocumentosColeccion = async(req, res = response) => {
         break;
         case 'productos':
         if (isNaN(busqueda)) {
-            data = await Producto.find({nombre: regex })
+            data = await Producto.find({nombre: regex } , {descripcion: regex } , {tags: regex })
                                     .populate('categoria', 'nombre img');
         }
         if (!isNaN(busqueda)) {

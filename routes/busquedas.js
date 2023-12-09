@@ -11,7 +11,7 @@ const router = Router();
 
 router.get('/:busqueda', getTodo);
 
-router.get('/coleccion/:tabla/:busqueda', validarJWT, getDocumentosColeccion);
+router.get('/coleccion/:tabla/:busqueda',  getDocumentosColeccion);
 
 router.get('/search/:search', searchArticle );
 
