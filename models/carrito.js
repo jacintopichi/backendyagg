@@ -11,7 +11,7 @@ const CarritoSchema = Schema({
 
     cliente: {
         nombre: { type: String, required: true },
-        tel : { type: String, required: true },
+        tel : { type: String },
         email: { type: String, required: true },       
     },
 
