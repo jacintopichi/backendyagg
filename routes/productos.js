@@ -18,16 +18,7 @@ const { getProductos,
 const router = Router();
 
 
-
-// Obtener todas las productos - publico
-
 router.get('/', getProductos);
-
-// Obtener una producto por id - publico
-
-// router.get('/:id', getCategoria);
-
-// Crear producto - privado - cualquier persona con un token válido
 
 router.post('/', [
     validarJWT,
@@ -41,9 +32,6 @@ router.post('/', [
     check('linkdepago', 'El link de pago es obligatorio'),
     validarcampos
 ], crearProducto);
-
-
-// Actualizar - privado - cualquier persona con un token válido
 
 
 router.put('/:id', [
@@ -62,12 +50,13 @@ router.put('/:id', [
 router.put('/link/:id', validarJWT, actualizarLinkProducto);
 router.put('/estado/:id', validarJWT, actualizarEstadoProducto);
 
-// Borrar una producto - Admin
+
+
 
 router.delete('/:id', validarJWT, borrarProducto);
 
 
-router.get('/:id', validarJWT,   getProductosById);
+router.get('/:id',  getProductosById);
 
 
 router.get('/categoria/:categoria',  getProductosByCategoria);

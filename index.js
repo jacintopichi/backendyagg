@@ -33,6 +33,8 @@ app.use('/api/comments', require('./routes/comments')); // Ruta para busquedas
 app.use('/api/likes', require('./routes/like')); // Ruta para busquedas
 app.use('/api/dislikes', require('./routes/dislikes')); // Ruta para busquedas
 app.use('/api/testimonials', require('./routes/testimonial')); // Ruta para busquedas
+app.use('/api/carrito', require('./routes/carrito')); // Ruta para busquedas
+
 
 
 
