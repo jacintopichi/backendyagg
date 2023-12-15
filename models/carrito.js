@@ -10,21 +10,40 @@ const CarritoSchema = Schema({
     },
 
     cliente: {
-      
-       
+        nombre: { type: String, required: true },
+        tel : { type: String, required: true },
+        email: { type: String, required: true },       
     },
 
     shippingAddress: {
+        street: { type: String, required: true },
+        city: { type: String, required: true },
+        state: { type: String },
+        country: { type: String, required: true },
+        zipCode: { type: String, required: true },
        
     },
     billingAddress : {
+        street: { type: String, required: true },
+        city: { type: String, required: true },
+        state: { type: String },
+        country: { type: String, required: true },
+        zipCode: { type: String, required: true },
       
     },
-    order: {
+    order: [{
+        cantidad: { type: Number, required: true },
+        total: { type: Number, required: true },    
       
-    },
+    }],
 
     orderItems: [{
+        _id:  { type: String, required: true },
+        nombre: { type: String, required: true },
+        cantidad: { type: Number, required: true },
+        precio: { type: Number, required: true },
+        img : { type: String, required: true },
+        oferta : { type: Number, required: true },
       
     }],
 

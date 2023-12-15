@@ -7,12 +7,11 @@ const getCarritos = async(req, res) => {
     
         await Promise.all([
             Carrito.countDocuments(),
-            Carrito.find({}, 'cliente shippingAddress  order orderItems billingAddress estado dateOrdered')
+            Carrito.find({}, 'cliente shippingAddress order orderItems billingAddress estado dateOrdered')
             .populate('usuario', 'nombre email img')
             // .populate('productos', 'nombre img precio')
             .skip(desde)
-            .limit(10)
-    
+            .limit(10)    
         ])
         .then(respuestas => {
     
