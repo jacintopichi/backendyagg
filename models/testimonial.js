@@ -6,6 +6,10 @@ const TestimonialSchema = Schema({
         type: String,
         required: [true, 'El contenido es obligatorio']
     },
+    iduser: {
+        type: String,
+        required: [true, 'El id del usuario es obligatorio']
+    },
     date: {
         type: Date,
         default: Date.now

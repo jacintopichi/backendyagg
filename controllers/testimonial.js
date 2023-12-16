@@ -53,9 +53,9 @@ const createTestimonial = async(req, res = response) => {
 
 
 const deleteTestimonial = async(req, res = response) => {
-    const id = req.params.id; 
+    const iduser = req.params.iduser; 
     try {
-        const testimonialdb = await Testimonial.findById( id );
+        const testimonialdb = await Testimonial.find({ iduser })
 
         if ( !testimonialdb ) {
             return res.status(404).json({
@@ -64,7 +64,7 @@ const deleteTestimonial = async(req, res = response) => {
             });
         }
 
-        await Testimonial.findByIdAndDelete( id );
+        await Testimonial.deleteOne({ iduser });
         res.json({
             ok: true,
             msg: 'Testimonial eliminado'

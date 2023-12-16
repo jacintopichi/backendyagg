@@ -18,7 +18,7 @@ router.post('/', [
 ], createTestimonial );
 
 
-router.delete('/:id', validarJWT, deleteTestimonial );
+router.delete('/:iduser', validarJWT, deleteTestimonial );
 
 router.put('/:id', [
     validarJWT,
